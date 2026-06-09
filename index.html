@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NUM_CRACK v2.0 — Missing Digits Exploit</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Matrix Rain Canvas -->
+  <canvas id="matrix"></canvas>
+
+  <!-- Boot Screen / Loader -->
+  <div id="bootScreen">
+    <div class="boot-inner">
+      <div class="boot-logo">NUM_CRACK</div>
+      <div class="boot-sub">MISSING DIGITS EXPLOITATION SYSTEM v2.0</div>
+      <div class="boot-lines" id="bootLines"></div>
+      <div class="boot-bar-wrap">
+        <div class="boot-bar" id="bootBar"></div>
+      </div>
+      <div class="boot-pct" id="bootPct">0%</div>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app" class="hidden">
+
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+      <span class="topbar-logo">&#9632; NUM_CRACK <span class="ver">v2.0</span></span>
+      <span class="topbar-status"><span class="dot blink"></span> SYSTEM ONLINE</span>
+      <span class="topbar-time" id="clock"></span>
+    </div>
+
+    <div class="container">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="glitch-wrap">
+          <h1 class="glitch" data-text="MISSING DIGITS">MISSING DIGITS</h1>
+        </div>
+        <p class="hero-sub">&gt; Brute-force all 1000 combinations for unknown positions</p>
+      </div>
+
+      <!-- Terminal Window -->
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="t-dot red"></span>
+          <span class="t-dot yellow"></span>
+          <span class="t-dot green"></span>
+          <span class="t-title">root@numcrack:~$</span>
+        </div>
+        <div class="terminal-body">
+
+          <!-- Step 1 -->
+          <div class="t-section">
+            <div class="t-prompt">&gt; INPUT_TARGET [10-digit number]</div>
+            <div class="input-wrap">
+              <span class="input-prefix">$&gt;</span>
+              <input
+                type="text"
+                id="numInput"
+                class="hacker-input"
+                maxlength="10"
+                placeholder="_ _ _ _ _ _ _ _ _ _"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <span class="char-count" id="charCount">0/10</span>
+            </div>
+            <div class="error-line" id="numError">[ERROR] 10 digits required. Input rejected.</div>
+          </div>
+
+          <div class="t-divider"></div>
+
+          <!-- Step 2 -->
+          <div class="t-section">
+            <div class="t-prompt">&gt; SELECT_UNKNOWN_POSITIONS [3 required]</div>
+            <div class="t-hint">// Click positions you want to brute-force</div>
+            <div class="pos-grid" id="posSelector"></div>
+            <div class="error-line" id="posError">[ERROR] Must select exactly 3 positions.</div>
+          </div>
+
+          <div class="t-divider"></div>
+
+          <!-- Preview -->
+          <div class="t-section">
+            <div class="t-prompt">&gt; TARGET_PREVIEW</div>
+            <div class="preview-box" id="preview">
+              <span class="preview-hint">// Awaiting input...</span>
+            </div>
+          </div>
+
+          <div class="t-divider"></div>
+
+          <!-- Execute Button -->
+          <div class="t-section">
+            <div class="t-prompt">&gt; EXECUTE_BRUTEFORCE</div>
+            <button class="exec-btn" id="runBtn" onclick="calculate()">
+              <span class="exec-bracket">[</span>
+              <span class="exec-text">CRACK IT</span>
+              <span class="exec-bracket">]</span>
+              <span class="exec-cursor blink">_</span>
+            </button>
+            <button class="reset-btn-hacker" onclick="resetAll()">[ RESET ]</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Results Terminal -->
+      <div class="terminal results-terminal hidden" id="resultsSection">
+        <div class="terminal-bar">
+          <span class="t-dot red"></span>
+          <span class="t-dot yellow"></span>
+          <span class="t-dot green"></span>
+          <span class="t-title">root@numcrack:~/results$</span>
+          <span class="t-badge" id="countBadge">0 COMBINATIONS</span>
+        </div>
+        <div class="terminal-body">
+
+          <div class="t-section">
+            <div class="t-prompt">&gt; BRUTEFORCE_COMPLETE</div>
+            <div class="crack-status" id="crackStatus"></div>
+          </div>
+
+          <div class="t-divider"></div>
+
+          <div class="t-section">
+            <div class="t-prompt">&gt; FILTER_RESULTS</div>
+            <div class="input-wrap">
+              <span class="input-prefix">$&gt;</span>
+              <input type="text" id="searchBox" class="hacker-input" placeholder="filter string..." oninput="filterResults()" />
+              <span class="char-count" id="filterCount">1000 found</span>
+            </div>
+          </div>
+
+          <div class="t-divider"></div>
+
+          <div class="t-section">
+            <div class="t-prompt">&gt; OUTPUT_DUMP</div>
+            <div class="results-grid" id="resultsGrid"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-bar">
+      <span>[SYS] NUM_CRACK v2.0</span>
+      <span>[MEM] 1000 combinations/run</span>
+      <span>[NET] OFFLINE MODE</span>
+    </div>
+
+  </div>
+
+  <script src="js/matrix.js"></script>
+  <script src="js/boot.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
